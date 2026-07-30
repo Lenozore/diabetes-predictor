@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Model Dashboard{% endblock %}
+{% block content %}
+<section class="dashboard">
+  <h1>Model comparison — real held-out test results</h1>
+  <p class="muted">Selected for deployment: <strong>{{ selected_model }}</strong></p>
+
+  <div class="card">
+    <canvas id="metrics-chart" height="110"></canvas>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2>Test-set metrics</h2>
+      <table class="data-table">
+        <thead>
+          <tr><th>Model</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>ROC-AUC</th></tr>
+        </thead>
+        <tbody>
+          {% for name, m in all_metrics.items() %}
+          <tr {% if name == selected_model %}class="row-selected"{% endif %}>
+            <td>{{ name }}</td>
+            <td>{{ (m.accuracy*100)|round(1) }}%</td>
+            <td>{{ (m.precision*100)|round(1) }}%</td>
+            <td>{{ (m.recall*100)|round(1) }}%</td>
+            <td>{{ (m.f1*100)|round(1) }}%</td>
+            <td>{{ m.roc_auc|round(3) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>SHAP feature ranking (selected model)</h2>
+      <canvas id="shap-chart" height="200"></canvas>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Recent screenings this session</h2>
+    {% if log %}
+    <table class="data-table">
+      <thead><tr><th>Time</th><th>Glucose</th><th>BMI</th><th>Age</th><th>Result</th><th>Probability</th></tr></thead>
+      <tbody>
+        {% for r in log %}
+        <tr>
+          <td>{{ r.timestamp }}</td>
+          <td>{{ r.input.Glucose }}</td>
+          <td>{{ r.input.BMI }}</td>
+          <td>{{ r.input.Age }}</td>
+          <td>{{ "Diabetic risk" if r.prediction else "Non-diabetic" }}</td>
+          <td>{{ (r.probability*100)|round(1) }}%</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="muted">No screenings run yet this session — try the <a href="{{ url_for('predict_page') }}">screening form</a>. Prediction history is stored in-memory for this session only.</p>
+    {% endif %}
+  </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/chart.umd.min.js') }}"></script>
+<script>
+  const allMetrics = {{ all_metrics | tojson }};
+  const shapRanking = {{ shap_ranking | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

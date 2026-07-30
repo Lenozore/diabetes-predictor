@@ -1,0 +1,12 @@
+flask==3.1.3
+joblib==1.5.3
+numpy==2.4.4
+pandas==3.0.2
+scikit-learn==1.8.0
+xgboost==3.3.0
+shap==0.52.0
+gunicorn==23.0.0
+
+# Only needed if model_artifacts/model_metadata.json says "model_type": "keras"
+# (i.e. the ANN/DNN was the selected model instead of XGBoost). Uncomment then:
+# tensorflow==2.21.0

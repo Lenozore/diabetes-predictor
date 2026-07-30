@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+generate_viva_pdf.py
+NTCC_Viva_Preparation_Guide.pdf
+.env
+node_modules/

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Screen a Patient{% endblock %}
+{% block content %}
+<section class="predict-layout">
+  <form id="predict-form" class="card form-card">
+    <h1>Patient vitals</h1>
+    <p class="muted">All eight fields are required. Values are the same units used in the training dataset.</p>
+
+    <div class="field-grid">
+      <label>Pregnancies
+        <input type="number" name="Pregnancies" min="0" max="20" step="1" value="2" required>
+      </label>
+      <label>Glucose (mg/dL)
+        <input type="number" name="Glucose" min="0" max="300" step="1" value="120" required>
+      </label>
+      <label>Blood pressure (mm Hg)
+        <input type="number" name="BloodPressure" min="0" max="200" step="1" value="70" required>
+      </label>
+      <label>Skin thickness (mm)
+        <input type="number" name="SkinThickness" min="0" max="100" step="1" value="20" required>
+      </label>
+      <label>Insulin (mu U/ml)
+        <input type="number" name="Insulin" min="0" max="900" step="1" value="80" required>
+      </label>
+      <label>BMI
+        <input type="number" name="BMI" min="0" max="80" step="0.1" value="28.5" required>
+      </label>
+      <label>Diabetes pedigree function
+        <input type="number" name="DiabetesPedigreeFunction" min="0" max="3" step="0.001" value="0.4" required>
+      </label>
+      <label>Age (years)
+        <input type="number" name="Age" min="1" max="120" step="1" value="35" required>
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Run screening</button>
+    <p id="form-error" class="error-text" hidden></p>
+  </form>
+
+  <div class="card result-card">
+    <h2>Result</h2>
+    <div class="gauge-wrap">
+      <svg viewBox="0 0 200 120" class="gauge">
+        <path d="M 10 110 A 90 90 0 0 1 190 110" class="gauge-track"/>
+        <path id="gauge-fill" d="M 10 110 A 90 90 0 0 1 190 110" class="gauge-fill"/>
+        <line id="gauge-needle" x1="100" y1="110" x2="100" y2="30" class="gauge-needle"/>
+        <circle cx="100" cy="110" r="6" class="gauge-hub"/>
+      </svg>
+      <div class="gauge-readout">
+        <span id="gauge-percent">—</span>
+        <span id="gauge-label" class="muted">Awaiting input</span>
+      </div>
+    </div>
+
+    <div id="contributions" class="contrib-list"></div>
+    <p class="disclaimer-inline">Screening estimate only — not a medical diagnosis.</p>
+  </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

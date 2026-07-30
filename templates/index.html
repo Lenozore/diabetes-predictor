@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Diabetes Risk Panel — Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">End-to-end ML pipeline · Section 7 system</p>
+    <h1>Read eight vitals.<br>Get a risk read in real time.</h1>
+    <p class="lede">
+      Glucose, BMI, age, and five other routine measurements go in.
+      A tuned {{ model_name }} classifier — benchmarked against five other
+      models — comes back with a probability and the feature contributions
+      behind it, in under a second.
+    </p>
+    <a class="btn btn-primary" href="{{ url_for('predict_page') }}">Screen a patient →</a>
+  </div>
+  <div class="hero-panel">
+    <div class="dial-readout">
+      <span class="dial-label">Selected model</span>
+      <span class="dial-value">{{ model_name }}</span>
+    </div>
+    <ul class="stat-list">
+      <li><span>Accuracy</span><strong>{{ (metrics.accuracy * 100) | round(1) }}%</strong></li>
+      <li><span>Recall</span><strong>{{ (metrics.recall * 100) | round(1) }}%</strong></li>
+      <li><span>ROC-AUC</span><strong>{{ metrics.roc_auc | round(3) }}</strong></li>
+      <li><span>Inference</span><strong>{{ (metrics.inference_ms_per_sample * 1000) | round(1) }}µs</strong></li>
+    </ul>
+  </div>
+</section>
+
+<section class="how">
+  <h2>How a screening request flows</h2>
+  <ol class="flow">
+    <li><span class="flow-num">1</span>Form values are validated against physiologically plausible ranges.</li>
+    <li><span class="flow-num">2</span>The same imputation, outlier-capping, and scaling used at training time run identically at inference.</li>
+    <li><span class="flow-num">3</span>The trained model returns a class and a probability.</li>
+    <li><span class="flow-num">4</span>SHAP attributes the score back to the eight input features.</li>
+  </ol>
+</section>
+{% endblock %}

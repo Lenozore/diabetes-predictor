@@ -1,0 +1,125 @@
+{
+  "selected_model": "XGBoost",
+  "model_type": "sklearn",
+  "feature_order": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age"
+  ],
+  "zero_as_missing_cols": [
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI"
+  ],
+  "test_metrics": {
+    "accuracy": 0.7467532467532467,
+    "precision": 0.6595744680851063,
+    "recall": 0.5740740740740741,
+    "f1": 0.6138613861386139,
+    "roc_auc": 0.8183333333333332,
+    "inference_ms_per_sample": 0.018740629220937752,
+    "train_time_s": 2.5832161903381348
+  },
+  "all_model_metrics": {
+    "Logistic Regression": {
+      "accuracy": 0.7142857142857143,
+      "precision": 0.6086956521739131,
+      "recall": 0.5185185185185185,
+      "f1": 0.56,
+      "roc_auc": 0.8077777777777778,
+      "inference_ms_per_sample": 0.009538291336654068,
+      "train_time_s": 0.11574149131774902
+    },
+    "Decision Tree": {
+      "accuracy": 0.7662337662337663,
+      "precision": 0.6451612903225806,
+      "recall": 0.7407407407407407,
+      "f1": 0.6896551724137931,
+      "roc_auc": 0.7873148148148148,
+      "inference_ms_per_sample": 0.006650949453378653,
+      "train_time_s": 0.32895374298095703
+    },
+    "Random Forest": {
+      "accuracy": 0.7207792207792207,
+      "precision": 0.6410256410256411,
+      "recall": 0.46296296296296297,
+      "f1": 0.5376344086021505,
+      "roc_auc": 0.7988888888888889,
+      "inference_ms_per_sample": 0.14829171168339716,
+      "train_time_s": 17.712188720703125
+    },
+    "SVM": {
+      "accuracy": 0.7077922077922078,
+      "precision": 0.6,
+      "recall": 0.5,
+      "f1": 0.5454545454545454,
+      "roc_auc": 0.8101851851851852,
+      "inference_ms_per_sample": 0.012482915605817522,
+      "train_time_s": 1.2689907550811768
+    },
+    "XGBoost": {
+      "accuracy": 0.7467532467532467,
+      "precision": 0.6595744680851063,
+      "recall": 0.5740740740740741,
+      "f1": 0.6138613861386139,
+      "roc_auc": 0.8183333333333332,
+      "inference_ms_per_sample": 0.018740629220937752,
+      "train_time_s": 2.5832161903381348
+    },
+    "ANN/DNN": {
+      "accuracy": 0.7402597402597403,
+      "precision": 0.625,
+      "recall": 0.6481481481481481,
+      "f1": 0.6363636363636364,
+      "roc_auc": 0.8122222222222222,
+      "inference_ms_per_sample": 1.287404592935141,
+      "train_time_s": 14.632648229598999
+    }
+  },
+  "best_params": {
+    "Logistic Regression": {
+      "C": 10
+    },
+    "Decision Tree": {
+      "max_depth": 5,
+      "min_samples_split": 10
+    },
+    "Random Forest": {
+      "max_depth": 4,
+      "n_estimators": 300
+    },
+    "SVM": {
+      "C": 1,
+      "gamma": "scale",
+      "kernel": "linear"
+    },
+    "XGBoost": {
+      "learning_rate": 0.05,
+      "max_depth": 3,
+      "n_estimators": 100
+    }
+  },
+  "shap_ranking": {
+    "Glucose": 0.9228274822235107,
+    "BMI": 0.5443609356880188,
+    "Age": 0.2801785171031952,
+    "DiabetesPedigreeFunction": 0.2715860903263092,
+    "Pregnancies": 0.16454385221004486,
+    "Insulin": 0.12706555426120758,
+    "SkinThickness": 0.037196822464466095,
+    "BloodPressure": 0.023530200123786926
+  },
+  "dataset_source": "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv",
+  "n_rows_after_dedup": 768,
+  "class_balance": {
+    "non_diabetic": 500,
+    "diabetic": 268
+  }
+}

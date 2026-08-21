@@ -2,23 +2,24 @@
 {% block title %}About{% endblock %}
 {% block content %}
 <section class="about card">
-  <h1>About this system</h1>
+  <h1>About</h1>
   <p>
-    This tool is the deployed component of an NTCC capstone project on
-    diabetes risk prediction. It compares six model families —
+    An end-to-end machine learning project exploring model selection and interpretability.
+    I trained and compared six model families —
     Logistic Regression, Decision Tree, Random Forest, SVM, XGBoost, and a
-    custom ANN — trained on the Pima Indians Diabetes Database, and serves
-    the best-performing one ({{ model_name }}) behind a Flask API.
+    custom neural network — on the Pima Indians Diabetes Database to understand
+    trade-offs between accuracy and generalization. The best-performing model ({{ model_name }}) 
+    is served via a Flask API.
   </p>
 
-  <h2>What it is not</h2>
+  <h2>Scope & Limitations</h2>
   <ul>
-    <li>Not a clinical diagnostic tool, and not validated on real patients.</li>
-    <li>Not a substitute for a blood glucose test, HbA1c test, or a doctor's assessment.</li>
-    <li>Trained on 768 records from one historical population — predictions may not generalize across age, sex, or ethnicity.</li>
+    <li>Not a clinical diagnostic tool — predictions are exploratory, not validated on real patients.</li>
+    <li>Not a substitute for blood glucose testing or a doctor's assessment.</li>
+    <li>Trained on 768 historical records from a single population — generalization across demographics is limited.</li>
   </ul>
 
-  <h2>Current test-set performance</h2>
+  <h2>Model Performance</h2>
   <table class="data-table">
     <tbody>
       <tr><td>Accuracy</td><td>{{ (metrics.accuracy*100)|round(1) }}%</td></tr>
@@ -31,5 +32,10 @@
 
   <h2>Stack</h2>
   <p class="mono-line">Python · Pandas · scikit-learn · XGBoost · TensorFlow/Keras · SHAP · Flask · vanilla JS</p>
+
+  <h2>Source</h2>
+  <p>
+    <a href="https://github.com/Lenozore/diabetes-predictor" target="_blank">View on GitHub →</a>
+  </p>
 </section>
 {% endblock %}
